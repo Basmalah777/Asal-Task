@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>TodoInput</h1>
+    <div class="container">
+      <div class="input-group">
+        <div class="book-icon">
+          <img
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATlJREFUSEvtls1Nw0AUhGfW2SDu/BwpICBBA/yKAuiAGuiACmiBAwVAASihBZC4IXFEooLI9g44EMkJeL3BS6JI9s3S2/neG+1bDbGgjwvi4lewpC7y/ATUHoBug+YE8QlJckcyL+v8AEvDbThzD2CjAXDyKNGnscd+cJ4+AtiJBh0LGdcjV57HvxMTS1qDy96jQwtBhyNaO6gAp/ufBQ/zB6fpIQz6FeDL8IZ0DnBrot47sQfMxAavnrJ0AOJgucHhNldU/tXqFjyzA63VZcvkf0BmdjfKHjej1r3V7cSN/S0JLME68QXQTbShTXZNrr7WBwHxjJ3ObTTwlNB09NmEy96+a66Y2Iu5gAuI/ivs+S7XCKxhD84U8Wc96rR14C/4KNCfgtoFYKM04LtcUQCBIsEBLlAvuOwDhfW3H7WtkN0AAAAASUVORK5CYII="
+          />
+        </div>
+        <div class="input-section">
+          <input type="text" id="taskInput" placeholder="Enter a new task" />
+        </div>
+      </div>
+      <div class="error-message" id="error-message"></div>
+      <button id="addTaskButton">Add Task</button>
+    </div>
+    <h1>To-Do List</h1>
+    <div class="filter-section">
+      <button id="filterAll">All</button>
+      <button id="filterDone">Done</button>
+      <button id="filterTodo">Todo</button>
+    </div>
+    <div id="todoList"></div>
+    <div class="actions">
+      <button id="deleteAllButton">Delete All Tasks</button>
+      <button id="deleteDoneButton">Delete Done Tasks</button>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
