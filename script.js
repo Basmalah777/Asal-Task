@@ -254,6 +254,13 @@ document.addEventListener("DOMContentLoaded", () => {
   filterDoneButton.addEventListener("click", () => renderTasks("done"));
   filterTodoButton.addEventListener("click", () => renderTasks("todo"));
 
+  // Add these new event listeners
+  const deleteAllButton = document.getElementById("deleteAllButton");
+  const deleteDoneButton = document.getElementById("deleteDoneButton");
+
+  deleteAllButton.addEventListener("click", deleteAllTasks);
+  deleteDoneButton.addEventListener("click", deleteDoneTasks);
+
   // Initial render
   renderTasks();
 });

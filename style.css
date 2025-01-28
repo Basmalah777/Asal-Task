@@ -1,158 +1,232 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Segoe UI", Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #f5f5f5;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
   margin: 0;
+  padding: 1.5rem;
 }
 
 h1 {
-  margin-bottom: 1.4rem;
+  color: #2c3e50;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 2rem 0;
+  position: relative;
+  text-align: center;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 0.2rem;
+  background: #337eac;
+  margin: 0.5rem auto;
+  border-radius: 0.1rem;
 }
 
 .container {
-  text-align: center;
   background-color: #fff;
-  padding: 2rem;
-  width: 70rem;
-  border: 0.1rem solid rgb(208, 199, 199);
-  border-radius: 0.3rem;
+  padding: 1.5rem;
+  width: 50rem;
+  border-radius: 0.4rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  display: flex;
+  margin: 0.5rem 1.5rem;
 }
 
 .book-icon {
-  background-color: #337eac;
-  width: 2.5rem;
-  height: 2.3rem;
+  background: #337eac;
+  width: 2.2rem;
+  height: 2.2rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.2rem 0rem 0rem 0.2rem;
-}
-.input-group {
-  display: flex;
-  margin-left: 1.5rem;
+  border-radius: 0.4rem 0 0 0.4rem;
 }
 
 .book-icon img {
-  width: 1.6rem;
-}
-
-.error-message {
-  color: red;
-  font-size: 1rem;
-  margin-bottom: 10px;
-}
-
-.input-section {
-  display: flex;
-  margin-bottom: 0.5rem;
-  width: 100%;
+  width: 1.2rem;
+  height: 1.2rem;
+  filter: brightness(0) invert(1);
 }
 
 #taskInput {
   flex: 1;
-  padding: 0.6rem;
-  border: 1px solid #ddd;
-  border-radius: 0rem 0.2rem 0.2rem 0rem;
+  padding: 0.6rem 1rem;
+  border: 0.1rem solid #e1e8ed;
+  border-radius: 0 0.4rem 0.4rem 0;
+  font-size: 0.95rem;
+}
+
+#taskInput:focus {
+  outline: none;
+  border-color: #337eac;
+  box-shadow: 0 0 0 0.2rem rgba(51, 126, 172, 0.1);
+}
+
+.error-message {
+  color: #dc3545;
+  font-size: 0.85rem;
+  margin: 0.3rem 0;
+  text-align: left;
+  padding-left: 0.5rem;
 }
 
 #addTaskButton {
-  background-color: #337eac;
+  background: #337eac;
   color: #fff;
   border: none;
-  padding: 10px 15px;
-  margin-left: 1.5rem;
-  border-radius: 4px;
+  padding: 0.6rem;
+  margin: 0.8rem auto 0;
+  border-radius: 0.4rem;
   cursor: pointer;
-  width: 98%;
+  width: 95%;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 #addTaskButton:hover {
-  background-color: #235d80;
+  background: #235d80;
+  transform: translateY(-0.1rem);
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
-  padding: 0.2rem;
-  background: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 73rem;
+  margin-bottom: 0.6rem;
+  padding: 0.7rem;
+  background: #fff;
+  border: 0.1rem solid #e1e8ed;
+  border-radius: 0.4rem;
+  width: 50rem;
+}
+
+.task-item:hover {
+  border-color: #337eac;
+  box-shadow: 0 0.2rem 0.4rem rgba(51, 126, 172, 0.1);
 }
 
 .task-item span {
   flex: 1;
+  margin: 0 1rem;
+  font-size: 0.95rem;
 }
 
 .task-item span.completed {
   text-decoration: line-through;
+  text-decoration-thickness: 0.1rem;
+  text-decoration-color: #888;
   color: #888;
+  opacity: 0.7;
+  display: inline-block;
+  width: fit-content;
 }
 
-button {
-  background: none;
-  border: none;
+.task-item input[type="checkbox"] {
+  margin-right: 0.8rem;
+  width: 1.2rem;
+  height: 1.2rem;
   cursor: pointer;
-}
-.actions {
-  display: flex;
-  justify-content: space-around;
-}
-.actions button {
-  background-color: #dc3545;
-  color: #fff;
-  border: none;
-  padding-right: 14.9rem;
-  padding-left: 14.9rem;
-  margin: 5px 0;
-  border-radius: 4px;
-  width: 200%;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  margin-left: 0.5rem;
-  height: 1.5rem;
-}
-
-.actions button:hover {
-  background-color: #e48b94;
 }
 
 .filter-section {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 20px;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  width: 50rem;
 }
 
 .filter-section button {
-  background-color: #337eac;
+  background: #337eac;
   color: #fff;
   border: none;
-  padding: 0.5rem 10.5rem;
-  border-radius: 4px;
+  padding: 0.6rem 4rem;
+  border-radius: 0.4rem;
   cursor: pointer;
-  transition: background-color 0.3s;
-  margin-right: 1.5rem;
-  margin-left: 1.5rem;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  flex: 1;
 }
 
 .filter-section button:hover {
-  background-color: #235d80;
-  box-shadow: 0 0.2em 0.4em #7dc4d0;
+  background: #235d80;
 }
 
-/* Popup Styles */
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 50rem;
+}
+
+.actions button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.6rem 4rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  flex: 1;
+  max-width: 25rem;
+}
+
+.actions button:hover {
+  background: #c82333;
+}
+
+.edit-button,
+.delete-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin: 0 0.5rem;
+  padding: 0.4rem;
+  transition: all 0.3s ease;
+}
+
+.edit-button:hover,
+.delete-button:hover {
+  transform: scale(1.1);
+}
+
+.edit-button img,
+.delete-button img {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* إضافة دعم الخطوط العربية */
+@font-face {
+  font-family: "Segoe UI";
+  src: local("Segoe UI");
+  unicode-range: U+0600-06FF;
+}
+
+* {
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* تنسيقات النافذة المنبثقة */
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(0.3rem);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -162,19 +236,18 @@ button {
 .custom-popup {
   background-color: white;
   padding: 2rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 0.6rem;
+  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
   text-align: center;
-  min-width: 300px;
+  min-width: 35rem;
   max-width: 90%;
-  width: auto;
   animation: popupFadeIn 0.3s ease-out;
 }
 
 @keyframes popupFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-1rem);
   }
   to {
     opacity: 1;
@@ -184,57 +257,59 @@ button {
 
 .custom-popup p {
   margin: 0 0 1.5rem 0;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #337eac;
 }
 
 .popup-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
+  gap: 1.2rem;
+  margin-top: 1.5rem;
 }
 
 .popup-buttons button {
-  padding: 0.8rem 2rem;
+  padding: 0.8rem 2.5rem;
   border: none;
-  border-radius: 4px;
+  border-radius: 0.4rem;
   cursor: pointer;
-  font-size: 1rem;
+  font-size: 0.95rem;
   transition: all 0.3s ease;
 }
 
 .popup-confirm {
-  background-color: #337eac !important;
+  background: #337eac !important;
   color: white !important;
 }
 
 .popup-confirm:hover {
-  background-color: #235d80 !important;
+  background: #235d80 !important;
+  transform: translateY(-0.1rem);
 }
 
 .popup-cancel {
-  background-color: #f8f9fa !important;
+  background: #f8f9fa !important;
   color: #337eac !important;
-  border: 1px solid #337eac !important;
+  border: 0.1rem solid #337eac !important;
 }
 
 .popup-cancel:hover {
-  background-color: #e2e6ea !important;
+  background: #e2e6ea !important;
+  transform: translateY(-0.1rem);
 }
 
 .popup-input {
   width: calc(100% - 2rem);
-  padding: 0.8rem;
+  padding: 0.7rem;
   margin: 1rem 0;
-  border: 2px solid #337eac;
-  border-radius: 4px;
-  font-size: 1rem;
+  border: 0.1rem solid #337eac;
+  border-radius: 0.4rem;
+  font-size: 0.95rem;
   outline: none;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .popup-input:focus {
   border-color: #235d80;
-  box-shadow: 0 0 0 2px rgba(51, 126, 172, 0.2);
+  box-shadow: 0 0 0 0.2rem rgba(51, 126, 172, 0.1);
 }
