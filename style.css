@@ -6,15 +6,28 @@ body {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
   margin: 0;
-  padding: 1.5rem;
+  padding: 1rem;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #fff;
+  padding: 1rem 1rem;
+  width: 100rem;
+  max-width: 80%;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
+  margin-bottom: 1rem;
+  box-sizing: border-box;
 }
 
 h1 {
   color: #2c3e50;
   font-size: 1.8rem;
   font-weight: 600;
-  margin: 2rem 0;
-  position: relative;
+  margin: 0.8rem 0;
   text-align: center;
 }
 
@@ -24,46 +37,34 @@ h1::after {
   width: 4rem;
   height: 0.2rem;
   background: #337eac;
-  margin: 0.5rem auto;
-  border-radius: 0.1rem;
-}
-
-.container {
-  background-color: #fff;
-  padding: 1.5rem;
-  width: 50rem;
-  border-radius: 0.4rem;
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
-  margin-bottom: 2rem;
+  margin: 0.3rem auto;
 }
 
 .input-group {
   display: flex;
-  margin: 0.5rem 1.5rem;
+  margin: 0.5rem 0;
+  gap: 0;
 }
 
 .book-icon {
   background: #337eac;
-  width: 2.2rem;
-  height: 2.2rem;
+  min-width: 3rem;
+  height: 3rem;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 0.4rem 0 0 0.4rem;
-}
-
-.book-icon img {
-  width: 1.2rem;
-  height: 1.2rem;
-  filter: brightness(0) invert(1);
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 #taskInput {
   flex: 1;
-  padding: 0.6rem 1rem;
+  padding: 0.8rem 57.3rem;
+  font-size: 1rem;
   border: 0.1rem solid #e1e8ed;
-  border-radius: 0 0.4rem 0.4rem 0;
-  font-size: 0.95rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  text-align: left;
+  padding-left: 0.5rem;
+  transition: all 0.3s ease;
 }
 
 #taskInput:focus {
@@ -72,42 +73,56 @@ h1::after {
   box-shadow: 0 0 0 0.2rem rgba(51, 126, 172, 0.1);
 }
 
-.error-message {
-  color: #dc3545;
-  font-size: 0.85rem;
-  margin: 0.3rem 0;
-  text-align: left;
-  padding-left: 0.5rem;
+.filter-section {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin: 0.8rem 0;
 }
 
-#addTaskButton {
+.filter-section button {
+  flex: 1;
+  padding: 0.6rem 12rem;
+  font-size: 1rem;
+  max-width: 150px;
   background: #337eac;
-  color: #fff;
+  color: white;
   border: none;
-  padding: 0.6rem;
-  margin: 0.8rem auto 0;
   border-radius: 0.4rem;
   cursor: pointer;
-  width: 95%;
-  font-size: 0.95rem;
-  font-weight: 500;
   transition: all 0.3s ease;
 }
 
-#addTaskButton:hover {
+.filter-section button:hover {
   background: #235d80;
-  transform: translateY(-0.1rem);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.filter-section button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tasks-container {
+  max-height: 144px;
+  overflow-y: auto;
+  margin: 0.8rem 0;
+  padding-right: 0.8rem;
+  width: 74rem;
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  margin-bottom: 0.6rem;
-  padding: 0.7rem;
-  background: #fff;
+  padding: 0.6rem;
+  background: white;
   border: 0.1rem solid #e1e8ed;
-  border-radius: 0.4rem;
-  width: 50rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+  height: 48px;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
 }
 
 .task-item:hover {
@@ -118,115 +133,121 @@ h1::after {
 .task-item span {
   flex: 1;
   margin: 0 1rem;
-  font-size: 0.95rem;
 }
 
 .task-item span.completed {
   text-decoration: line-through;
-  text-decoration-thickness: 0.1rem;
-  text-decoration-color: #888;
-  color: #888;
+  color: #e74c3c;
   opacity: 0.7;
-  display: inline-block;
-  width: fit-content;
-}
-
-.task-item input[type="checkbox"] {
-  margin-right: 0.8rem;
-  width: 1.2rem;
-  height: 1.2rem;
-  cursor: pointer;
-}
-
-.filter-section {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  margin: 1.5rem 0;
-  width: 50rem;
-}
-
-.filter-section button {
-  background: #337eac;
-  color: #fff;
-  border: none;
-  padding: 0.6rem 4rem;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
-  flex: 1;
-}
-
-.filter-section button:hover {
-  background: #235d80;
-}
-
-.actions {
-  display: flex;
-  justify-content: center;
-  gap: 1.5rem;
-  width: 50rem;
-}
-
-.actions button {
-  background: #dc3545;
-  color: white;
-  border: none;
-  padding: 0.6rem 4rem;
-  border-radius: 0.4rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
-  flex: 1;
-  max-width: 25rem;
-}
-
-.actions button:hover {
-  background: #c82333;
 }
 
 .edit-button,
 .delete-button {
   background: none;
   border: none;
+  font-size: 1.2rem;
   cursor: pointer;
-  margin: 0 0.5rem;
-  padding: 0.4rem;
+  padding: 0.3rem;
+  margin-left: 0.5rem;
+  opacity: 0.7;
   transition: all 0.3s ease;
 }
 
 .edit-button:hover,
 .delete-button:hover {
+  opacity: 1;
   transform: scale(1.1);
 }
 
-.edit-button img,
-.delete-button img {
-  width: 1.2rem;
-  height: 1.2rem;
+.edit-button:active,
+.delete-button:active {
+  transform: scale(1);
 }
 
-/* إضافة دعم الخطوط العربية */
-@font-face {
-  font-family: "Segoe UI";
-  src: local("Segoe UI");
-  unicode-range: U+0600-06FF;
+.tasks-container::-webkit-scrollbar {
+  width: 8px;
 }
 
-* {
-  font-family: "Segoe UI", Arial, sans-serif;
+.tasks-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
 }
 
-/* تنسيقات النافذة المنبثقة */
+.tasks-container::-webkit-scrollbar-thumb {
+  background: #337eac;
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  gap: 1.4rem;
+  margin-top: 0.8rem;
+}
+
+.actions button {
+  flex: 1;
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 36rem;
+  background: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.actions button:hover {
+  background: #c0392b;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.actions button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+  text-align: center;
+  display: none;
+}
+
+#addTaskButton {
+  background: #337eac;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1rem;
+  width: 100%;
+  margin-top: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+#addTaskButton:hover {
+  background: #235d80;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#addTaskButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(0.3rem);
+  background: rgba(0, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -234,82 +255,141 @@ h1::after {
 }
 
 .custom-popup {
-  background-color: white;
+  background: white;
   padding: 2rem;
-  border-radius: 0.6rem;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  border-radius: 0.8rem;
   text-align: center;
-  min-width: 35rem;
-  max-width: 90%;
-  animation: popupFadeIn 0.3s ease-out;
-}
-
-@keyframes popupFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-1rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.custom-popup p {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.2rem;
-  color: #337eac;
+  width: 400px;
 }
 
 .popup-buttons {
   display: flex;
   justify-content: center;
-  gap: 1.2rem;
+  gap: 1rem;
   margin-top: 1.5rem;
 }
 
-.popup-buttons button {
-  padding: 0.8rem 2.5rem;
-  border: none;
+.popup-confirm,
+.popup-cancel {
+  padding: 0.8rem 2rem;
   border-radius: 0.4rem;
   cursor: pointer;
-  font-size: 0.95rem;
+  border: none;
+  color: white;
+  transition: background-color 0.3s;
+}
+
+.popup-confirm {
+  background: #337eac;
+}
+
+.popup-confirm:hover {
+  background: #235d80;
+}
+
+.popup-cancel {
+  background: #6c757d;
+}
+
+.popup-cancel:hover {
+  background: #5a6268;
+}
+
+/* تنسيق نافذة Popup */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.custom-popup {
+  background: white;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  text-align: center;
+  width: 400px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease;
+}
+
+.custom-popup h3 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.popup-confirm,
+.popup-cancel {
+  padding: 0.8rem 2.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .popup-confirm {
-  background: #337eac !important;
-  color: white !important;
+  background: #337eac;
+  color: white;
 }
 
 .popup-confirm:hover {
-  background: #235d80 !important;
-  transform: translateY(-0.1rem);
+  background: #235d80;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .popup-cancel {
-  background: #f8f9fa !important;
-  color: #337eac !important;
-  border: 0.1rem solid #337eac !important;
+  background: #6c757d;
+  color: white;
 }
 
 .popup-cancel:hover {
-  background: #e2e6ea !important;
-  transform: translateY(-0.1rem);
+  background: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.popup-input {
-  width: calc(100% - 2rem);
-  padding: 0.7rem;
-  margin: 1rem 0;
-  border: 0.1rem solid #337eac;
-  border-radius: 0.4rem;
-  font-size: 0.95rem;
-  outline: none;
-  transition: all 0.3s ease;
+/* تأثيرات حركية */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.popup-input:focus {
-  border-color: #235d80;
-  box-shadow: 0 0 0 0.2rem rgba(51, 126, 172, 0.1);
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* تأثير عند الضغط على الأزرار */
+.popup-confirm:active,
+.popup-cancel:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const filterAllButton = document.querySelector("#filterAll");
   const filterDoneButton = document.querySelector("#filterDone");
   const filterTodoButton = document.querySelector("#filterTodo");
+  const deleteAllButton = document.getElementById("deleteAllButton");
+  const deleteDoneButton = document.getElementById("deleteDoneButton");
 
   // Helper function to persist data
   const saveTasksToStorage = (tasks) => {
@@ -31,35 +33,25 @@ document.addEventListener("DOMContentLoaded", () => {
         const taskItem = document.createElement("div");
         taskItem.classList.add("task-item");
 
-        const taskText = document.createElement("span");
-        taskText.textContent = task.text;
-        if (task.completed) taskText.classList.add("completed");
-
         const checkbox = document.createElement("input");
         checkbox.type = "checkbox";
         checkbox.checked = task.completed;
         checkbox.addEventListener("change", () => toggleTaskStatus(index));
 
+        const taskText = document.createElement("span");
+        taskText.textContent = task.text;
+        if (task.completed) taskText.classList.add("completed");
+
         const editButton = document.createElement("button");
-        editButton.classList.add("edit-button");
-        const editIcon = document.createElement("img");
-        editIcon.src =
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAAjhJREFUSEvFlk1rE0EYx//PTo61Ylg3ibTgC1Khl9A1llqiuYk3v4KfwIsXxZvoxS/hN/CmN61VPLl9sSBFBLU1ZGfSRHrzZXZGVjaSl9m46Y4kkNMs83t+T579PyFM6UNT4uK/gLVuFIQ4XPQ85z1R8MskZx0chpfOOBQ9A7AAjd2CwrXiqWBvGG4V3GpVTzOHvQIw1wf6GqmoXqlsfe6HWwN3u/5x+RM7IMyPtFZj3ynIFdfdbvbOrIHjCzn3bxPwKGVgH3ul4KY1MOf+Ocbk956NCJfuguiBAf7jpHdshmhNxme5jDmvnSWodQIkMbnag6eY2zEWonoemr0EUEnsPjlM1v+aC/8ONB4mZ02HyeXcv3Fi+gZAaWhSvxjMb1mZ6oMD/4KK8AJAOWWIBszjaS8Wg8Nc73G7fXFBK/0agDsuagkYMM+VXFmhCcQYGhMHSKtVW2SOWvuXaVZoptcpgcYxeCLDJgsjFa0Mx+PErZ4UCtJ1z9v4mKHA9AARolaFVs+zmk4CTW11Ao3DYTZD9W2QvpzVdGxWi9DfM26Z0SqEw3DVdYPdDAUOPDKS1Z1mbT4qqJHFbbi47TBcOQrU2GrO/RsEPBlnoIEuY1g9KtQIFsK/D417aeAYqjUa5XKwM2l7xwaI4EtPAbpuutQW1GzMfQ7AM4C/aehGqbTxLo+pcao7neW5SMp9AG0Am3++Wm8Sc7Zc9+0HImgb0BHjeIUpJWf6F7YtUK61aLOIXP+58hQyNfBvxl75H6XgqjYAAAAASUVORK5CYII=";
-        editIcon.alt = "Edit";
-        editIcon.style.width = "1.2rem";
-        editIcon.style.height = "1.2rem";
-        editButton.appendChild(editIcon);
+        editButton.innerHTML =
+          '<i class="fas fa-pencil-alt" style="color: #ffd43b;"></i>';
+        editButton.className = "edit-button";
         editButton.addEventListener("click", () => editTask(index));
 
         const deleteButton = document.createElement("button");
-        deleteButton.classList.add("delete-button");
-        const deleteIcon = document.createElement("img");
-        deleteIcon.src =
-          "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAAXNSR0IArs4c6QAAATNJREFUSEvtlsFKw0AQhv/Zktie9Gqago8gvTddn0EFD4p9A6H4Fh70EQp6EfQZ3KR38REEY8WbnqwJ7mgPlQpNs0mFCO5ed/75ZoaZnSVUdKgiLozBjN3ayH0+BtDICPbNS6ITArRJMsbg2AnOiHC0yCkxnXpp2P81cOwEh0QYmDgEsNdMoss82x8ZP9SlFFrf5InK3GshtlpjpabavwF+qssNrXWvTEZ5GiHEYH2s7udmPCuOHbnJNazlOVzYbB948VN1N88ms6vjlUARo7sMmAmh/x5JC55UwJb6uw9sc5UZKztOs1Wz42TH6T9tJze4ImC7zMMx1TBw7SfRTqF9PHI7+ww6XwZM4AMvGV4UAk+MH51OmwW6X//l1SIBMPEraYTNdHibpTP+0BcBm9hWBv4EED+6H4eFQw4AAAAASUVORK5CYII=";
-        deleteIcon.alt = "Delete";
-        deleteIcon.style.width = "1.2rem";
-        deleteIcon.style.height = "1.2rem";
-        deleteButton.appendChild(deleteIcon);
+        deleteButton.innerHTML =
+          '<i class="fas fa-trash-alt" style="color: #ff6b6b;"></i>';
+        deleteButton.className = "delete-button";
         deleteButton.addEventListener("click", () => deleteTask(index));
 
         taskItem.append(checkbox, taskText, editButton, deleteButton);
@@ -67,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   };
 
-  // Toggle task status
   const toggleTaskStatus = (index) => {
     const tasks = getTasksFromStorage();
     tasks[index].completed = !tasks[index].completed;
@@ -75,32 +66,31 @@ document.addEventListener("DOMContentLoaded", () => {
     renderTasks();
   };
 
-  // Add a new task
   const addTask = () => {
-    const task = taskInput.value.trim();
+    const taskText = taskInput.value.trim();
 
-    if (task === "") {
-      errorMessage.textContent = "Task cannot be empty.";
-    } else if (task.length < 5) {
-      errorMessage.textContent = "Task must be at least 5 characters long.";
-    } else if (/^\d/.test(task.trim())) {
-      errorMessage.textContent = "Task cannot start with a number.";
-    } else {
-      errorMessage.textContent = ""; // Clear any previous error messages
-      const tasks = getTasksFromStorage();
-      tasks.push({ text: task, completed: false });
-      saveTasksToStorage(tasks);
-      renderTasks();
-      taskInput.value = ""; // Clear the input field after adding the task
+    if (!validateTask(taskText)) {
+      return;
     }
+
+    const task = {
+      id: Date.now(),
+      text: taskText,
+      completed: false,
+    };
+
+    const tasks = getTasksFromStorage();
+    tasks.push(task);
+    saveTasksToStorage(tasks);
+    renderTasks();
+    taskInput.value = "";
+    hideError();
   };
 
-  // Edit a task
   const editTask = (index) => {
     const tasks = getTasksFromStorage();
     const currentTask = tasks[index].text;
 
-    // Create custom popup for editing
     const overlay = document.createElement("div");
     overlay.className = "popup-overlay";
 
@@ -109,8 +99,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const messageElement = document.createElement("p");
     messageElement.textContent = "Edit Task:";
+    messageElement.style.color = "#337eac";
 
-    // Create input field
     const inputField = document.createElement("input");
     inputField.type = "text";
     inputField.value = currentTask;
@@ -120,34 +110,25 @@ document.addEventListener("DOMContentLoaded", () => {
     buttonsContainer.className = "popup-buttons";
 
     const saveButton = document.createElement("button");
-    saveButton.textContent = "Save";
     saveButton.className = "popup-confirm";
+    saveButton.textContent = "Save";
 
     const cancelButton = document.createElement("button");
-    cancelButton.textContent = "Cancel";
     cancelButton.className = "popup-cancel";
+    cancelButton.textContent = "Cancel";
 
-    // Add event listeners
     saveButton.addEventListener("click", () => {
-      const newTaskText = inputField.value.trim();
+      const newText = inputField.value.trim();
 
-      if (!newTaskText) {
-        alert("Task cannot be empty.");
-        return;
+      if (newText && newText.length >= 5 && !/^\d/.test(newText)) {
+        const tasks = getTasksFromStorage();
+        tasks[index].text = newText;
+        saveTasksToStorage(tasks);
+        renderTasks();
+        document.body.removeChild(overlay);
+      } else {
+        alert("Invalid input. Please check the requirements.");
       }
-      if (newTaskText.length < 5) {
-        alert("Task must be at least 5 characters long.");
-        return;
-      }
-      if (/^\d/.test(newTaskText)) {
-        alert("Task cannot start with a number.");
-        return;
-      }
-
-      tasks[index].text = newTaskText;
-      saveTasksToStorage(tasks);
-      renderTasks();
-      document.body.removeChild(overlay);
     });
 
     cancelButton.addEventListener("click", () => {
@@ -160,7 +141,6 @@ document.addEventListener("DOMContentLoaded", () => {
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
 
-    // Focus input field
     inputField.focus();
     inputField.select();
   };
@@ -197,14 +177,12 @@ document.addEventListener("DOMContentLoaded", () => {
       document.body.removeChild(overlay);
     });
 
-    // Append elements
     buttonsContainer.append(confirmButton, cancelButton);
     popup.append(messageElement, buttonsContainer);
     overlay.appendChild(popup);
     document.body.appendChild(overlay);
   };
 
-  // Update delete functions to use custom popup
   const deleteTask = (index) => {
     createCustomPopup("Are you sure you want to delete this task?", () => {
       const tasks = getTasksFromStorage();
@@ -246,21 +224,193 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   };
 
-  // Event listener for the "Add Task" button
   addTaskButton.addEventListener("click", addTask);
 
-  // Event listeners for filters
   filterAllButton.addEventListener("click", () => renderTasks("all"));
   filterDoneButton.addEventListener("click", () => renderTasks("done"));
   filterTodoButton.addEventListener("click", () => renderTasks("todo"));
 
-  // Add these new event listeners
-  const deleteAllButton = document.getElementById("deleteAllButton");
-  const deleteDoneButton = document.getElementById("deleteDoneButton");
+  const showPopup = (message, hasItems = true) => {
+    const overlay = document.createElement("div");
+    overlay.className = "popup-overlay";
 
-  deleteAllButton.addEventListener("click", deleteAllTasks);
-  deleteDoneButton.addEventListener("click", deleteDoneTasks);
+    const popup = document.createElement("div");
+    popup.className = "custom-popup";
+
+    const messageElement = document.createElement("p");
+    messageElement.textContent = message;
+    messageElement.style.color = "#337eac";
+
+    const buttonsContainer = document.createElement("div");
+    buttonsContainer.className = "popup-buttons";
+
+    // Single OK button for no items case
+    if (!hasItems) {
+      const okButton = document.createElement("button");
+      okButton.className = "popup-confirm";
+      okButton.style.width = "100px";
+      okButton.textContent = "OK";
+      okButton.onclick = () => document.body.removeChild(overlay);
+      buttonsContainer.appendChild(okButton);
+    } else {
+      const confirmButton = document.createElement("button");
+      confirmButton.className = "popup-confirm";
+      confirmButton.textContent = "Delete";
+      confirmButton.onclick = () => {
+        if (message.includes("all tasks")) {
+          localStorage.removeItem("tasks");
+        } else {
+          const tasks = getTasksFromStorage().filter((task) => !task.completed);
+          saveTasksToStorage(tasks);
+        }
+        renderTasks();
+        document.body.removeChild(overlay);
+      };
+
+      const cancelButton = document.createElement("button");
+      cancelButton.className = "popup-cancel";
+      cancelButton.textContent = "Cancel";
+      cancelButton.onclick = () => document.body.removeChild(overlay);
+
+      buttonsContainer.append(confirmButton, cancelButton);
+    }
+
+    popup.append(messageElement, buttonsContainer);
+    overlay.appendChild(popup);
+    document.body.appendChild(overlay);
+  };
+
+  deleteAllButton.addEventListener("click", () => {
+    const tasks = getTasksFromStorage();
+    if (tasks.length === 0) {
+      showPopup("No tasks to delete", false); // Only OK button
+    } else {
+      showPopup("Are you sure you want to delete all tasks?", true);
+    }
+  });
+
+  deleteDoneButton.addEventListener("click", () => {
+    const tasks = getTasksFromStorage();
+    const doneTasks = tasks.filter((task) => task.completed);
+    if (doneTasks.length === 0) {
+      showPopup("No completed tasks to delete", false); // Only OK button
+    } else {
+      showPopup("Are you sure you want to delete all completed tasks?", true);
+    }
+  });
 
   // Initial render
   renderTasks();
+
+  function validateTask(task) {
+    if (/^\d/.test(task)) {
+      showError("Task cannot start with a number");
+      return false;
+    }
+
+    if (task.trim() === "") {
+      showError("Task cannot be empty");
+      return false;
+    }
+
+    if (task.trim().length < 5) {
+      showError("Task must be at least 5 characters long");
+      return false;
+    }
+
+    hideError();
+    return true;
+  }
+
+  function showError(message) {
+    errorMessage.textContent = message;
+    errorMessage.style.display = "block";
+    taskInput.classList.add("error");
+  }
+
+  function hideError() {
+    errorMessage.style.display = "none";
+    taskInput.classList.remove("error");
+  }
+
+  addTaskButton.addEventListener("click", addTask);
+  taskInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      addTask();
+    }
+  });
+
+  // Update HTML elements text
+  if (document.getElementById("addTaskButton")) {
+    document.getElementById("addTaskButton").textContent = "Add Task";
+  }
+  if (document.getElementById("filterAll")) {
+    document.getElementById("filterAll").textContent = "All";
+  }
+  if (document.getElementById("filterDone")) {
+    document.getElementById("filterDone").textContent = "Done";
+  }
+  if (document.getElementById("filterTodo")) {
+    document.getElementById("filterTodo").textContent = "Todo";
+  }
+  if (document.getElementById("deleteAllButton")) {
+    document.getElementById("deleteAllButton").textContent = "Delete All Tasks";
+  }
+  if (document.getElementById("deleteDoneButton")) {
+    document.getElementById("deleteDoneButton").textContent =
+      "Delete Done Tasks";
+  }
+  if (document.getElementById("taskInput")) {
+    document.getElementById("taskInput").placeholder = "Enter a new task";
+  }
+
+  // Add Font Awesome link to head
+  const fontAwesomeLink = document.createElement("link");
+  fontAwesomeLink.rel = "stylesheet";
+  fontAwesomeLink.href =
+    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css";
+  document.head.appendChild(fontAwesomeLink);
+
+  // الستايل الي لرساله الخطأ
+  const style = document.createElement("style");
+  style.textContent = `
+        .edit-button, .delete-button {
+          background: none;
+          border: none;
+          font-size: 1.2rem;
+          cursor: pointer;
+          padding: 0.3rem;
+          margin-left: 0.5rem;
+          opacity: 0.7;
+          transition: opacity 0.3s;
+        }
+    
+        .edit-button:hover, .delete-button:hover {
+          opacity: 1;
+        }
+    
+        .task-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+    
+        .task-item span {
+          flex: 1;
+        }
+  
+        .error-message {
+          color: #e74c3c;
+          font-size: 0.9rem;
+          margin-top: 0.5rem;
+          text-align: center;
+          display: none;
+        }
+  
+        #taskInput.error {
+          border-color: #e74c3c;
+          box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.1);
+        }
+      `;
+  document.head.appendChild(style);
 });
